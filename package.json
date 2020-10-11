@@ -1,0 +1,19 @@
+{
+  "name": "u-develop-it",
+  "version": "1.0.0",
+  "description": "an app to help voting",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sithSlave/u-develop-it.git"
+  },
+  "author": "Josh Miller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sithSlave/u-develop-it/issues"
+  },
+  "homepage": "https://github.com/sithSlave/u-develop-it#readme"
+}
