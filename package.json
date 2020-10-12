@@ -4,7 +4,10 @@
   "description": "an app to help voting",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "migrate": "sqlite3 db/election.db < db/schema.sql",
+    "seed": "sqlite3 db/election.db < db/seeds.sql",
+    "db": "sqlite3 db/election.db"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/sithSlave/u-develop-it/issues"
   },
-  "homepage": "https://github.com/sithSlave/u-develop-it#readme"
+  "homepage": "https://github.com/sithSlave/u-develop-it#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "jest": "^26.5.3"
+  }
 }
