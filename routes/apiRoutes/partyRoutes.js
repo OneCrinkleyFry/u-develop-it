@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const db = require('../../db/database');
 
+//get all parties
 router.get('/parties', (req, res) => {
     const sql = `SELECT * FROM parties`;
     const params = [];
@@ -17,10 +18,11 @@ router.get('/parties', (req, res) => {
     });
 });
 
+//get one party matching id
 router.get('/party/:id', (req, res) => {
     const sql = `SELECT * FROM parties WHERE id = ?`;
     const params = [req.params.id];
-    db.get(sql, paramas, (err, row) => {
+    db.get(sql, params, (err, row) => {
         if (err) {
             res.status(400).json({ error: err.message });
             return;
@@ -33,6 +35,7 @@ router.get('/party/:id', (req, res) => {
     });
 });
 
+//delete one party matching id
 router.delete('/party/:id', (req,res) => {
     const sql = `DELETE FROM parties WHERE id = ?`;
     const params = [req.params.id];
@@ -48,3 +51,5 @@ router.delete('/party/:id', (req,res) => {
         });
     });
 });
+
+module.exports = router;
