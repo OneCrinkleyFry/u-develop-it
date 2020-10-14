@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../../db/database');
 const inputCheck = require('../../utils/inputCheck');
 
+//get all voters
 router.get('/voters', (req, res) => {
     const sql = `SELECT * FROM voters ORDER BY last_name`;
     const params = [];
@@ -19,6 +20,7 @@ router.get('/voters', (req, res) => {
     });
 });
 
+//get one voter matching id
 router.get('/voter/:id', (req, res) => {
     const sql = `SELECT * FROM voters WHERE id = ?`;
     const params = [req.params.id];
@@ -33,8 +35,9 @@ router.get('/voter/:id', (req, res) => {
     });
 });
 
+//adds one voter
 router.post('/voter', ({ body }, res) => {
-    
+
     const errors = inputCheck(body, 'first_name', 'last_name', 'email');
 
     if (errors) {
@@ -55,6 +58,30 @@ router.post('/voter', ({ body }, res) => {
             message: 'success',
             data: body,
             id: this.lastID
+        });
+    });
+});
+
+router.put('/voter/:id', (req, res) => {
+    const errors = inputCheck(req.body, 'email');
+    if (errors) {
+        res.status(400).json({ error: errors });
+        return;
+    }
+
+    const sql = 'UPDATE voters SET email = ? WHERE id = ?';
+    const params = [req.body.email, req.params.id];
+
+    db.run(sql, params, function(err, data) {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+
+        res.json({
+            message: 'success',
+            data: req.body,
+            changes: this.changes
         });
     });
 });
